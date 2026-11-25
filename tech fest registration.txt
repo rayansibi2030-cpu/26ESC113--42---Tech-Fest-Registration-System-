@@ -1,0 +1,91 @@
+/* Tech Fest Registration System - Roll No. 42 */
+#include <stdio.h>
+
+#define MAX 50
+#define LEN 50
+
+int main(void)
+{
+    char participant[MAX][LEN];
+    char event[MAX][LEN];
+    int count = 0, choice, i, searchNo;
+
+    do
+    {
+        printf("\n===== TECH FEST REGISTRATION SYSTEM =====\n");
+        printf("1. Register participant\n");
+        printf("2. View all registrations\n");
+        printf("3. Search registration by S.No.\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+            case 1:
+                if (count >= MAX)
+                {
+                    printf("Registration list is full.\n");
+                }
+                else
+                {
+                    printf("Enter participant name: ");
+                    scanf(" %49[^\n]", participant[count]);
+                    printf("Enter event name: ");
+                    scanf(" %49[^\n]", event[count]);
+                    count++;
+                    printf("Registration successful! S.No. %d\n", count);
+                }
+                break;
+
+            case 2:
+                if (count == 0)
+                {
+                    printf("No registrations available.\n");
+                }
+                else
+                {
+                    printf("\nS.No.  Participant Name       Event Name\n");
+                    printf("------------------------------------------------\n");
+                    for (i = 0; i < count; i++)
+                    {
+                        printf("%-6d %-22s %s\n", i + 1, participant[i], event[i]);
+                    }
+                }
+                break;
+
+            case 3:
+                if (count == 0)
+                {
+                    printf("No registrations available.\n");
+                }
+                else
+                {
+                    printf("Enter registration S.No.: ");
+                    scanf("%d", &searchNo);
+
+                    if (searchNo >= 1 && searchNo <= count)
+                    {
+                        printf("\nRegistration found:\n");
+                        printf("S.No.: %d\n", searchNo);
+                        printf("Participant: %s\n", participant[searchNo - 1]);
+                        printf("Event: %s\n", event[searchNo - 1]);
+                    }
+                    else
+                    {
+                        printf("Registration not found.\n");
+                    }
+                }
+                break;
+
+            case 4:
+                printf("Exiting the program. Thank you!\n");
+                break;
+
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    } while (choice != 4);
+
+    return 0;
+}
